@@ -17,8 +17,8 @@ if [ "$1" != "" ]; then
       printf "Ahoy! I don't keep track of versions.\n"
       exit
     ;;
+
     "-h"*)
-    
     printf "\e[4m\e[1mAhoy!\e[0m
     
     \e[1mUsage:\e[0m
