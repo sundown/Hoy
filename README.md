@@ -7,7 +7,10 @@ Commit message can be manually input or derived from the `HOYFMT` shell variable
 **How:**
 ```sh
 $ hoy 
-# Add all files (respects .gitignore), commits with message from the HOYFMT, and pushes to origin.
+# Add all files (respects .gitignore), 
+# commits with message from the HOYFMT, 
+# and pushes to origin.
+
 # Equivalent to:
 $ git pull origin master && git add * && git commit $HOYFMT && git push origin master
 
