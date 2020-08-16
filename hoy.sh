@@ -2,11 +2,13 @@
 
 message="$HOYFMT"
 
+# Check if we're in a Git environment, not water-tight. 
 if [ $(git rev-parse --is-inside-work-tree) != true ]; then 
   printf "Ahoy! Looks like you're not inside a Git directory.\n"
   exit
 fi
 
+# Set 'default' HOYFMT
 if [ ! -n "$message" ]; then
 	message=$(date '+Sync on %Y-%m-%d')
 fi
@@ -58,11 +60,16 @@ if [ "$1" != "" ]; then
   esac
 fi
 
+# Pull from remote if $force and $local are both false
 if [ "$local" != true ] && [ "$force" != true ]; then
   git pull origin master
 fi
 
-if [ "$local" = true ] || [ "$force" = true ]; then
+# If force or local are true and $2 isn't empty, 
+# derive commit message from remaining args.
+# If neither force nor local are true derive 
+# Message from all args.
+if [ "$local" = true ] || [ "$force" = true ] && [ "$2" != "" ]; then
   message="${@:2}"
 elif [ "$1" != "" ]; then
   message="$@"
@@ -71,6 +78,7 @@ fi
 git add * 
 git commit -m "$message"
 
+# Determine whether or not to push or force push.
 if [ "$local" != true ] ; then
   if [ "$force" = true ] ; then
     git push origin master -f
