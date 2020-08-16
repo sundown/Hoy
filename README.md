@@ -30,3 +30,11 @@ $ hoy -f
 $ hoy -h
 # Displays help as well as some examples.
 ```
+
+**Why?**
+
+Sick typing the same 4 commands and an alias was not appropriate. 
+
+---
+
+My first sh script. Any feedback is appreciated. :evergreen_tree:
