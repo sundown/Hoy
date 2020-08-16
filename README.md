@@ -28,5 +28,5 @@ $ hoy -f
 
 ```sh
 $ hoy -h
-# Displays help as well as some examples
+# Displays help as well as some examples.
 ```
