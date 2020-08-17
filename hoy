@@ -3,8 +3,8 @@
 
 message="$HOYFMT"
 
-# Check if we're in a Git environment, not water-tight. 
-if [ "$(git rev-parse --is-inside-work-tree)" != true ]; then 
+# Check if we're in a Git environment, not water-tight.
+if [ "$(git rev-parse --is-inside-work-tree)" != true ]; then
   printf "Ahoy! Looks like you're not inside a Git directory.\n"
   exit
 fi
@@ -23,17 +23,17 @@ if [ "$1" != "" ]; then
 
     "-h"*)
     printf "\e[4m\e[1mAhoy!\e[0m
-    
+
     \e[1mUsage:\e[0m
     \t-h\tPrint this message.
     \t-f\tForce push to remote without pulling \e[4m[NOT RECOMMENDED]\e[0m.
     \t-l\tDo not push to remote.
-    
+
     \e[1mExamples:
     \t\e[4mhoy\e[0m
     \tAdd all files (respects .gitignore),
     \tcommits with the message \$HOYFMT, \n\tand pushes to origin.
-    
+
     \t\e[4mhoy -l \"update readme\"\e[0m
     \tAdd all files (respects .gitignore),
     \tcommits with input message,\n\tdoes not push.\n"
@@ -47,13 +47,13 @@ if [ "$1" != "" ]; then
       sleep 0.333 && printf "2"         # 1 second
       sleep 0.333 && printf "."
       sleep 0.333 && printf "."
-      sleep 0.333 && printf "1"         # 2 
+      sleep 0.333 && printf "1"         # 2
       sleep 0.333 && printf "."
       sleep 0.333 && printf "."
       sleep 0.333 && printf "now\n\n"   # 3
       force=true
     ;;
-    
+
     "-l"*)
       local=true
       printf "Local only, not pushing.\n"
@@ -66,14 +66,16 @@ if [ "$local" != true ] && [ "$force" != true ]; then
   git pull origin master
 fi
 
-# If force or local are true and $2 isn't empty, 
+# If force or local are true and $2 isn't empty,
 # derive commit message from remaining args.
-# If neither force nor local are true derive 
+# If neither force nor local are true derive
 # Message from all args.
 if [ "$local" = true ] || [ "$force" = true ] && [ "$2" != "" ]; then
   shift
   message="$*"
-fi 
+elif [ "$2" != "" ]; then
+  message="$*"
+fi
 
 git add ./*
 git commit -m "$message"
@@ -82,9 +84,7 @@ git commit -m "$message"
 if [ "$local" != true ] ; then
   if [ "$force" = true ] ; then
     git push origin master -f
-  else 
+  else
     git push origin master
   fi
 fi
-
-
