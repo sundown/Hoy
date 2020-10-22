@@ -12,7 +12,7 @@ $ hoy
 # and pushes to origin.
 
 # Equivalent to:
-$ git pull origin master && git add * && git commit $HOYFMT && git push origin master
+$ git pull origin master && git add * && git commit -m $(HOYFMT) && git push origin master
 
 ```	
 
